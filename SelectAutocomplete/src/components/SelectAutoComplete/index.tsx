@@ -37,20 +37,6 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
     setIsExiting(false);
     setIsDropdownVisible(true);
   };
-  // const handleBlur = () => {
-  //   const isInputValueIncluded = data.some(
-  //     (item) => item.label === inputValue || item.value === inputValue
-  //   );
-  //   if (!isInputValueIncluded) {
-  //     setInputValue("");
-  //     onChange(null);
-  //   }
-  //   setIsExiting(true);
-  //   setTimeout(() => {
-  //     setIsDropdownVisible(false);
-  //     setIsExiting(false);
-  //   }, 150); // Tempo da animação de saída
-  // };
 
   const handleBlur = () => {
     const matchedItems = data.filter(
@@ -64,13 +50,13 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
       onChange(null);
       setTimeout(() => {
         setResults(data);
-      }, 150); // Tempo da animação de saída
+      }, 150);
     }
     setIsExiting(true);
     setTimeout(() => {
       setIsDropdownVisible(false);
       setIsExiting(false);
-    }, 150); // Tempo da animação de saída
+    }, 150);
   };
   return (
     <S.Wrapper>
