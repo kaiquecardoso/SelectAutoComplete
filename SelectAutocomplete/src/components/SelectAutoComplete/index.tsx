@@ -104,6 +104,7 @@ const SelectAutoComplete: React.FC<Props> = ({
             <S.DropdownItem
               key={index}
               onClick={() => handleDropdownItemClick(item)}
+              selected={item === value ? true : false}
             >
               {item.label}
             </S.DropdownItem>

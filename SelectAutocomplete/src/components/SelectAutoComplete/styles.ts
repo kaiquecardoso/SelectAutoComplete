@@ -83,10 +83,14 @@ export const Dropdown: any = styled.ul`
   scrollbar-width: none;
 `;
 
-export const DropdownItem = styled.li`
+export const DropdownItem: any = styled.li`
   padding: 8px 12px;
   cursor: pointer;
+  background-color: ${(props: any) =>
+    props.selected ? "rgba(3, 127, 252, 0.1)" : "transparent"};
+  color: ${(props: any) => (props.selected ? "rgba(3, 127, 252)" : "#333")};
   &:hover {
-    background-color: #eee;
+    background-color: ${(props: any) =>
+      props.selected ? "rgba(3, 127, 252, 0.1)" : "#eee"};
   }
 `;
