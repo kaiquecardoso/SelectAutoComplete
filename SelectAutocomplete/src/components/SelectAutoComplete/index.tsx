@@ -4,7 +4,12 @@ import * as S from "./styles";
 import { DataProps, Props } from "./interface";
 import Fuse from "fuse.js";
 
-const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
+const SelectAutoComplete: React.FC<Props> = ({
+  data,
+  value,
+  onChange,
+  label = "",
+}) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
@@ -79,7 +84,7 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
 
   return (
     <S.Wrapper ref={containerRef}>
-      <S.Label>Parcelas</S.Label>
+      <S.Label>{label}</S.Label>
       <S.Container>
         <S.Input
           ref={inputRef}

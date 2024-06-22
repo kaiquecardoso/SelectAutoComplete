@@ -4,6 +4,7 @@ export interface DataProps {
 }
 
 export interface Props {
+  label: string;
   data: DataProps[];
   value: DataProps | null;
   onChange: (val: DataProps | null) => void;

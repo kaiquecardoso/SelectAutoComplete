@@ -10,6 +10,7 @@ function App() {
     <S.Container>
       <S.Form>
         <SelectAutoComplete
+          label="Parcelas"
           data={quantidadeParcelas}
           value={parcelas}
           onChange={(val: DataProps | null) => setParcelas(val)}
