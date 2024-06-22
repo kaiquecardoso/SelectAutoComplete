@@ -22,8 +22,31 @@ const slideOut = keyframes`
     opacity: 0;
   }
 `;
+
+const slideInAbove = keyframes`
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideOutAbove = keyframes`
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+`;
+
 export const Wrapper = styled.div`
-  position: relative; /* Adicione esta linha */
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
@@ -61,21 +84,28 @@ export const Input: any = styled.input`
 `;
 
 export const Dropdown: any = styled.ul`
-  margin-top: 65px;
   position: absolute;
   width: 100%;
   max-height: ${(props: any) => props?.dropdownMaxHeight}px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-radius: 4px;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #fff;
   z-index: 1;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
     rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
-  animation: ${({ isExiting }: any) => (isExiting ? slideOut : slideIn)} 0.2s
-    ease-in-out;
+  animation: ${({ isExiting, dropdownAbove }: any) =>
+      isExiting
+        ? dropdownAbove
+          ? slideOutAbove
+          : slideOut
+        : dropdownAbove
+        ? slideInAbove
+        : slideIn}
+    0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  top: ${({ dropdownAbove }: any) => (dropdownAbove ? "auto" : "100%")};
+  bottom: ${({ dropdownAbove }: any) => (dropdownAbove ? "70%" : "auto")};
 
   &::-webkit-scrollbar {
     display: none;

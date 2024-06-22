@@ -16,6 +16,7 @@ const SelectAutoComplete: React.FC<Props> = ({
   const [isExiting, setIsExiting] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [results, setResults] = useState<DataProps[]>(data);
+  const [dropdownAbove, setDropdownAbove] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,6 +25,24 @@ const SelectAutoComplete: React.FC<Props> = ({
       setInputValue(value?.label);
     }
   }, [value]);
+
+  useEffect(() => {
+    if (isDropdownVisible) {
+      const containerRect = containerRef.current?.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      if (containerRect) {
+        const spaceBelow = viewportHeight - containerRect.bottom;
+        const spaceAbove = containerRect.top;
+
+        if (spaceBelow < dropdownMaxHeight && spaceAbove > dropdownMaxHeight) {
+          setDropdownAbove(true);
+        } else {
+          setDropdownAbove(false);
+        }
+      }
+    }
+  }, [isDropdownVisible, dropdownMaxHeight]);
 
   const fuse = new Fuse(data, {
     keys: ["label"],
@@ -104,6 +123,7 @@ const SelectAutoComplete: React.FC<Props> = ({
           isExiting={isExiting}
           onMouseDown={handleDropdownMouseDown}
           dropdownMaxHeight={dropdownMaxHeight}
+          dropdownAbove={dropdownAbove}
         >
           {results.map((item, index) => (
             <S.DropdownItem
