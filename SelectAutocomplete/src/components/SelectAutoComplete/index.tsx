@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import * as S from "./styles";
 import { DataProps, Props } from "./interface";
 import Fuse from "fuse.js";
@@ -9,6 +9,8 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
   const [isExiting, setIsExiting] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [results, setResults] = useState<DataProps[]>(data);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (value) {
@@ -38,7 +40,10 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
     setIsDropdownVisible(true);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (event: React.FocusEvent) => {
+    if (containerRef.current?.contains(event.relatedTarget as Node)) {
+      return;
+    }
     const matchedItems = data.filter(
       (item) => item.label === inputValue || item.value === inputValue
     );
@@ -58,11 +63,27 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
       setIsExiting(false);
     }, 150);
   };
+
+  const handleDropdownMouseDown = (event: React.MouseEvent) => {
+    event.preventDefault(); // Prevents the input from losing focus
+  };
+
+  const handleDropdownItemClick = (item: DataProps) => {
+    setInputValue(item.label);
+    onChange(item);
+    setIsDropdownVisible(false);
+
+    setTimeout(() => {
+      inputRef.current?.blur();
+    }, 150);
+  };
+
   return (
-    <S.Wrapper>
+    <S.Wrapper ref={containerRef}>
       <S.Label>Parcelas</S.Label>
       <S.Container>
         <S.Input
+          ref={inputRef}
           value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleInputChange(e.target.value)
@@ -72,9 +93,12 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
         />
       </S.Container>
       {isDropdownVisible ? (
-        <S.Dropdown isExiting={isExiting}>
+        <S.Dropdown isExiting={isExiting} onMouseDown={handleDropdownMouseDown}>
           {results.map((item, index) => (
-            <S.DropdownItem key={index} onClick={() => onChange(item)}>
+            <S.DropdownItem
+              key={index}
+              onClick={() => handleDropdownItemClick(item)}
+            >
               {item.label}
             </S.DropdownItem>
           ))}

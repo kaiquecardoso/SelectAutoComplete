@@ -63,10 +63,11 @@ export const Dropdown: any = styled.ul`
   margin-top: 65px;
   position: absolute;
   width: 100%;
+  max-height: 200px; /* Defina uma altura máxima para que a rolagem seja ativada */
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  overflow-y: hidden; /* Remove o scroll vertical */
-  overflow-x: hidden; /* Remove o scroll horizontal */
+  overflow-y: auto; /* Ativa a rolagem vertical */
+  overflow-x: hidden; /* Remove a rolagem horizontal */
   background-color: #fff;
   z-index: 1;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
@@ -74,6 +75,14 @@ export const Dropdown: any = styled.ul`
   animation: ${({ isExiting }: any) => (isExiting ? slideOut : slideIn)} 0.2s
     ease-in-out;
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  /* Esconde o indicador de rolagem no Webkit (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Esconde o indicador de rolagem no Firefox */
+  scrollbar-width: none;
 `;
 
 export const DropdownItem = styled.li`
