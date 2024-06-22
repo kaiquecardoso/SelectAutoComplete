@@ -10,6 +10,7 @@ const SelectAutoComplete: React.FC<Props> = ({
   onChange,
   label = "",
   disabled = false,
+  dropdownMaxHeight = 200,
 }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
@@ -99,7 +100,11 @@ const SelectAutoComplete: React.FC<Props> = ({
         />
       </S.Container>
       {isDropdownVisible ? (
-        <S.Dropdown isExiting={isExiting} onMouseDown={handleDropdownMouseDown}>
+        <S.Dropdown
+          isExiting={isExiting}
+          onMouseDown={handleDropdownMouseDown}
+          dropdownMaxHeight={dropdownMaxHeight}
+        >
           {results.map((item, index) => (
             <S.DropdownItem
               key={index}

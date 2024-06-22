@@ -64,7 +64,7 @@ export const Dropdown: any = styled.ul`
   margin-top: 65px;
   position: absolute;
   width: 100%;
-  max-height: 200px;
+  max-height: ${(props: any) => props?.dropdownMaxHeight}px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   overflow-y: auto;
