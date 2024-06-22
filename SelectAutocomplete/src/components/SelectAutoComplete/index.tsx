@@ -9,6 +9,7 @@ const SelectAutoComplete: React.FC<Props> = ({
   value,
   onChange,
   label = "",
+  disabled = false,
 }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
@@ -85,7 +86,7 @@ const SelectAutoComplete: React.FC<Props> = ({
   return (
     <S.Wrapper ref={containerRef}>
       <S.Label>{label}</S.Label>
-      <S.Container>
+      <S.Container disabled={disabled}>
         <S.Input
           ref={inputRef}
           value={inputValue}
@@ -94,6 +95,7 @@ const SelectAutoComplete: React.FC<Props> = ({
           }
           onFocus={handleFocus}
           onBlur={handleBlur}
+          disabled={disabled}
         />
       </S.Container>
       {isDropdownVisible ? (

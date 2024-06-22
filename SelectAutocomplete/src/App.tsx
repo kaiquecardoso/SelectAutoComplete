@@ -14,6 +14,7 @@ function App() {
           data={quantidadeParcelas}
           value={parcelas}
           onChange={(val: DataProps | null) => setParcelas(val)}
+          disabled={false}
         />
       </S.Form>
     </S.Container>

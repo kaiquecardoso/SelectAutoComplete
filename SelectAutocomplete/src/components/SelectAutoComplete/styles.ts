@@ -34,12 +34,13 @@ export const Label = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Container = styled.div`
+export const Container: any = styled.div`
   border-width: 1px;
   border-color: #e0e0e0;
   border-style: solid;
   height: 40px;
   border-radius: 4px;
+  opacity: ${(props: any) => (props?.disabled ? 0.3 : 1)};
   overflow: hidden; /* Adicione esta linha */
 `;
 
