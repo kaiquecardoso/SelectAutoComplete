@@ -48,14 +48,14 @@ export const Input: any = styled.input`
   width: 100%;
   height: 40px;
   padding: 0 16px;
-  margin: 0; /* Remova a margem */
-  border: none; /* Remova a borda */
-  outline: none; /* Remova o contorno */
-  box-shadow: none; /* Remova a sombra */
-  background: none; /* Remova o background */
-  -webkit-appearance: none; /* Remova estilos padrão no Safari e Chrome */
-  -moz-appearance: none; /* Remova estilos padrão no Firefox */
-  appearance: none; /* Remova estilos padrão em navegadores modernos */
+  margin: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-size: 14px;
 `;
 
@@ -63,11 +63,11 @@ export const Dropdown: any = styled.ul`
   margin-top: 65px;
   position: absolute;
   width: 100%;
-  max-height: 200px; /* Defina uma altura máxima para que a rolagem seja ativada */
+  max-height: 200px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  overflow-y: auto; /* Ativa a rolagem vertical */
-  overflow-x: hidden; /* Remove a rolagem horizontal */
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #fff;
   z-index: 1;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
@@ -76,12 +76,9 @@ export const Dropdown: any = styled.ul`
     ease-in-out;
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-  /* Esconde o indicador de rolagem no Webkit (Chrome, Safari) */
   &::-webkit-scrollbar {
     display: none;
   }
-
-  /* Esconde o indicador de rolagem no Firefox */
   scrollbar-width: none;
 `;
 
