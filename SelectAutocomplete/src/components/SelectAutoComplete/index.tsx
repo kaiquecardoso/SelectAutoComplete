@@ -71,7 +71,6 @@ const SelectAutoComplete: React.FC<Props> = ({ data, value, onChange }) => {
   const handleDropdownItemClick = (item: DataProps) => {
     setInputValue(item.label);
     onChange(item);
-    setIsDropdownVisible(false);
 
     setTimeout(() => {
       inputRef.current?.blur();
